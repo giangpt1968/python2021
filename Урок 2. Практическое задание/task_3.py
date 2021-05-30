@@ -47,7 +47,6 @@ def revert_2(number, c):
         c = c + str(int(number) % 10)
         return revert_2(str(int(number) // 10), c)
 
-
 print(f'Перевёрнутое число: {revert_2(user_number, c)}')
 
 # Проверка
