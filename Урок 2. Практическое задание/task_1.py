@@ -32,27 +32,28 @@
 
 # Это реализация задачи  No: 1
 
-
 # Функция проверки ошибки
 def error_calc(symbol):
     return print(f'Вы ввели недопустимый символ {symbol}')
 
-
 def calculation():
-    """Калькулятор
-    Выбор операции и провека корректности введенных данных"""
+
+    """
+    Калькулятор
+    
+    """
     result = 0  # Значение результата поумолчанию
     operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
     if operation == '0':
-        return print(f'Завершена работа программы.')  # Условие выхода их программы
+        return print(f'Завершена работа программы.')  # БАЗОВЫЙ СЛУЧАЙ : Условие выхода их программы
     elif operation not in ['+', '-', '*', '/']:
-        return error_calc(operation), calc()
-    else:
+        return error_calc(operation), calculation()
+    else:                                            # Шаг рекурсии
         try:
             first_number = int(input('Введите первое число: '))
             second_number = int(input('Введите второе число: '))
         except ValueError:
-            return print(f'Вы вместо числа ввели строку (((. Исправьтесь'), calc()
+            return print(f'Вы вместо числа ввели строку, Исправьтесь'), calculation()
 
         if operation == '+':
             result = addition(first_number, second_number)
@@ -63,43 +64,35 @@ def calculation():
         elif operation == '/':
             result = division(first_number, second_number)
 
-    return print(f'Ваш результат: {result}'), calc()  # Вывод результата и рекурсивный запуск функции
+    return print(f'Ваш результат: {result}'), calculation()  # Вывод результата и рекурсивный запуск функции
 
 
 # Микрофункции для работы с данными
 """Функция сложения"""
 
-
 def addition(f_num, s_num):
     result = f_num + s_num
     return result
 
-
 """Функция вычитания"""
-
 
 def subtraction(f_num, s_num):
     result = f_num - s_num
     return result
 
-
 """Функция умножения"""
-
 
 def multiplication(f_num, s_num):
     result = f_num * s_num
     return result
 
-
 """Функция деления"""
-
 
 def division(f_num, s_num):
     try:
         result = f_num / s_num
         return result
     except ZeroDivisionError:
-        return print(f'На ноль делить нельзя!'), calc()
-
+        return print(f'На ноль делить нельзя!'), calculation()
 
 calculation()
