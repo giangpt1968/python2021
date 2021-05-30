@@ -22,3 +22,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# Это реализация задачи  No: 2
+
+# Первый вариантЖ
+
+def revert(number):
+    if len(number) == 1:  # Базовый случай
+        return number[0]
+    else:                 # шаг рекурсии
+        return number[-1] + revert(number[:-1])
+
+
+print(f'Перевёрнутое число: {revert(input("Введите число, которое требуется перевернуть: "))}')
+
+# Второй вариант:
+
+user_number = input('Введите число, которое требуется перевернуть: ')
+c = str()
+
+def revert_2(number, c):
+    if len(number) == 1:  # Базовый случай
+        return c + number
+    else:                 # шаг рекурсии
+        c = c + str(int(number) % 10)
+        return revert_2(str(int(number) // 10), c)
+
+
+print(f'Перевёрнутое число: {revert_2(user_number, c)}')
+
+# Проверка
+print(f'Для проверки: {user_number[::-1]}')
