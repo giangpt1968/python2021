@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# Это реализация задачи  No: 5
+
+def decode_ascii(begin=31, list_num=[]):
+    if begin == 127:
+        list_num.append(begin)
+        for i in range(1, len(list_num)):
+            if i % 10 == 0:
+                print(f'{list_num[i]} - {chr(list_num[i])} \n')
+            else:
+                print(f'{list_num[i]} - {chr(list_num[i])}', end='  ')
+    else:
+        list_num.append(begin)
+        return decode_ascii((begin + 1), list_num)
+
+decode_ascii()
