@@ -53,6 +53,7 @@ def check_3(lst_obj):
 
     Сложность: !!!   0(n log n)
     """
+
     lst_copy = list(lst_obj)                 # !!! 0(n)
     lst_copy.sort()                          # !!! 0(n log n )
     for i in range(len(lst_obj) - 1):        # !!! 0(n)
