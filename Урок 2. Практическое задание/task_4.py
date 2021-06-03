@@ -22,8 +22,22 @@ def rec_sum_num(el, num, count=0):
 
     else:        # шаг рекурсии
         el -= 1
-        num = (num / -2)
+        num = (num / 2 * -1)
         return rec_sum_num(el, num, count + 1)
 
 
 print(rec_sum_num(int(input('Введите количество элементов: ')), 1))
+
+# Это Ответ учителя
+
+def recur_method(i,numb, n_count, common_sum):
+    if i == n_count:
+        print(f"оличество элементов 2 : {n_count}, их сумма: {common_sum}")
+    elif i < n_count:
+        recur_method(i+1, numb / 2 * -1, n_count, common_sum+numb)
+
+try:
+    N_COUNT = int(input("Введите количество элементов 2 : "))
+    recur_method(0, 1, N_COUNT, 0)
+except ValueError:
+    print(" Пожалуйста, исправьте это ")
