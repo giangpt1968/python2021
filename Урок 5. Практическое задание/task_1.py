@@ -23,3 +23,31 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import Counter
+
+numbers = int(input('Введите количество предприятий для расчета прибыли: '))
+items = {}
+sum_all = Counter()
+
+for i in range(numbers):
+    title = input(f'Введите название предприятия {i + 1}. Название: ')
+    sum_ = 0
+    for j in range(1, 5):
+        sum_ += int(input(f'прибыль данного предприятия за каждый квартал {j}: '))
+    avg_ = sum_ / 4
+
+    items[title] = Counter(
+        {
+        'sum_': sum_,
+        'avg_': avg_
+        }
+    )
+    sum_all += items[title] # притянуто за уши конечно, но больше ничего не пришло в голову
+
+avg_all = sum_all['sum_'] / numbers
+print(f'Средняя годовая прибыль всех предприятий: {avg_all}')
+
+high = {j for j in items if items[j]['sum_'] > avg_all}
+low = set(items.keys()) - set(high)
+print(f'Предприятия, с прибылью  Выше среднего среднего значения : {high}')
+print(f'Предприятия, с прибылью ниже среднего значения: {low}')

@@ -34,3 +34,25 @@ hx = HexNumber
 hx + hx
 hex()
 """
+#
+from collections import defaultdict
+from functools import reduce
+hex_one = input('Введите первое число в шестнадцетиричной системе исчисления: ').upper()
+hex_two = input('Введите первое число в шестнадцетиричной системе исчисления: ').upper()
+
+hex_digits = defaultdict(list)
+for i in hex_one:
+    hex_digits['first'].append(i)
+for j in hex_two:
+    hex_digits['second'].append(j)
+
+lst = []
+for key in hex_digits:
+    lst.append(int(''.join(hex_digits[key]), 16))
+
+summ = hex(sum(lst)).upper()
+mult = hex(reduce(lambda x, y: x * y, lst)).upper()
+
+print(f' Сумма чисел будет = : {list(summ[2:])}')
+print(f' Произведение чисел будет = : {list(mult[2:])}')
+
