@@ -22,3 +22,48 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# Это реализация задачи  No: 3
+
+# Первый вариантЖ
+
+def revert(number):
+    if len(number) == 1:  # Базовый случай
+        return number[0]
+    else:                 # шаг рекурсии
+        return number[-1] + revert(number[:-1])
+
+
+print(f'Перевёрнутое число: {revert(input("Введите число, которое требуется перевернуть -1 : "))}')
+
+# Второй вариант:
+
+user_number = input('Введите число, которое требуется перевернуть -2 : ')
+c = str()
+
+def revert_2(number, c):
+    if len(number) == 1:  # Базовый случай
+        return c + number
+    else:                 # шаг рекурсии
+        c = c + str(int(number) % 10)
+        return revert_2(str(int(number) // 10), c)
+
+print(f'Перевёрнутое число -2 : {revert_2(user_number, c)}')
+
+# Проверка
+print(f'Для проверки: {user_number[::-1]}')
+
+#### From Teamate
+
+def revers_number(numb):
+    rest_numb, numeral = divmod(numb, 10)
+    if rest_numb == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(revers_number(rest_numb))
+
+"""
+def revers_number(num):
+return str(num) if numb < 10 else str(num %10) + revers_numbers(num // 10)
+"""
+number = int (input('Введите число, которое требуется перевернуть -3 :'))
+print(f'Перевёрнутое число -3: {revers_number(number)}')

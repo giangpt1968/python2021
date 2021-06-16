@@ -20,3 +20,49 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Это реализация задачи 3
+"""
+Название и годовая прибыль компанией.
+"""
+
+
+info_company = {'Company_1': 10000,'Company_2': 20000,
+                'Company_3': 30000,'Company_4': 40000,'Company_5': 50000}
+
+# Первое решение
+def best_company(list_company):
+
+     list_dict = list(list_company.items())
+     list_dict.sort(key=lambda pair: (pair[1],pair[0]), reverse=True)
+     print(f'Название компании : Годовая прибыль')
+
+     for i in range(5):
+      print (f"{list_dict[i][0]:<15}   : {list_dict[i][1]:>15}")
+
+best_company(info_company)
+
+
+# Второе  решение
+
+#info_company_copy = {}
+
+#№count = 0
+
+nfo_company1 = {'Company_1': 10000,'Company_2': 20000,
+                'Company_3': 30000,'Company_4': 40000,'Company_5': 50000}
+
+print(info_company1)
+print(list(info_company1.items()))
+a = list()
+b = list()
+for k,v in list(info_company1.items()):
+    a.append(k)
+    b.append(v)
+min_num = b[0]
+for i in range(len(b) - 1):
+    if b > b[i + 1]:
+        min_num = list_number[i + 1]
+print(sorted(b))
+
+#Сложность обе функции: O(n log n) и равная эффективность

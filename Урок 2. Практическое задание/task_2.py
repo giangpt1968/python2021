@@ -18,3 +18,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# Это реализация задачи  No: 2
+
+b = list(input('Введите число: '))
+
+def charact_number(num, e, o):
+    even_num, odd_num = e, o
+
+    """Рекурсия"""
+    if len(num) <= 0:  # Базовый случай
+        return f'Количество четных и нечетных цифр в числе равно: ({even_num}, {odd_num})'
+    else:
+        # шаг рекурсии
+        # рекурсивное условие если чётное число
+        if int(num[0]) % 2 == 0:
+            even_num += 1
+            return charact_number(num[1:], even_num, odd_num)
+        # шаг рекурсии
+        # рекурсивное условие если нечётное число
+        else:
+            odd_num += 1
+            return charact_number(num[1:], even_num, odd_num)
+
+print(charact_number(b, 0, 0))

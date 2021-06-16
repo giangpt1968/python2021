@@ -25,3 +25,73 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# Это реализация задачи 4
+
+""" Создать базу данных (БД) с: логином и паролем, аутентификацией """
+
+acc_dict = {'james': 'jm$$', 'Qwe': 'qwerty1', 'John': 'John2021'}
+auth_dict = {'james': False, 'Qwe': True, 'John': False}
+
+def auth_web(acc_dict, auth_dict):
+    """
+Сравнение введенных данных с данными в БД, проверка достоверности данных и отображение информации при
+прохождение / невыполнение проверки.
+    """
+    input_login = input('Введите логин: ').lower()
+    input_password = input('Введите пароль: ')
+    check_login = acc_dict.get(input_login, 'Invalid login')
+    check_auth = auth_dict.get(input_login)
+    if check_login == input_password:
+        print('Добро пожаловать на  наш сайт')
+        if not check_auth:
+            print('Вы не активировали свою учётную запись')
+            input_auth = input("""Пройти аутентификацию (y/n): """)
+            if input_auth == 'y':
+                print('Письмо отправлено на Ваш адрес электронной почты')
+                print('Пока вы не пройдете аутентификацию, вы не сможете войти в систему')
+            else:
+                print('Пока вы не пройдете аутентификацию, вы не сможете войти в систему')
+    else:
+        print('Неправильно указан логин\пароль')
+        auth_web(acc_dict, auth_dict)
+
+
+auth_web(acc_dict, auth_dict)
+
+acc_dict = {'james': ['jm$$', False], 'qwerty1': ['qwerty, True'], 'John': ['John2021', False]}
+
+def checking_account(user_dict):
+
+    """
+Проверка аккаунта
+
+    """
+    input_login = input('Введите логин: ')
+    input_password = input('Введите пароль: ')
+    check_username = user_dict.get(input_login, 'login not found')
+    if check_username[0] == input_password and check_username[1] == True:
+        print('Добро пожаловать на сайт!')
+    elif check_username[0] == input_password and check_username[1] == False:
+        print('Вы не активировали свою учётную запись')
+        input_auth = input("""Пройти аутентификацию (y/n): """)
+        if input_auth == 'y':
+            print('Письмо отправлено на Ваш адрес электронной почты')
+        else:
+            print('Пока вы не пройдете аутентификацию, вы не сможете войти в систему')
+    else:
+        print('Неправильно указан логин\пароль')
+        checking_account(acc_dict)
+
+
+checking_account(acc_dict)
+
+#
+# 2) оцените сложность каждого решения в нотации О-большое
+# 3) сделайте вывод, какое решение эффективнее и почему
+#
+
+# Две функции  имеют рекурсию при вводе неправильного логина\пароля без увеличения данных.
+# Две Функции имеют одинаковую сложность О(n)
+
+#Вторая функция имеет чуть более упрощенные шаги и более читаемый вид, и одновременную проверку на правильность
+#введённых данных и проверки аутентификации.
