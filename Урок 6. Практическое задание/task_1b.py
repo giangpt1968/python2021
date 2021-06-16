@@ -24,6 +24,7 @@
 
 import memory_profiler
 from timeit import default_timer
+import math
 
 
 def decor(func):
@@ -38,34 +39,26 @@ def decor(func):
     return wrapper
 
 
-@decor
-def min_value(lst):
-    min_v = lst[0]
-    for i in lst:
-        if i < min_v:
-            min_v = i
-    return min_v
+@memory_profiler.profile
+
+def fact_sum(val):
+    lst = [math.factorial(i) for i in range(1, val)]
+    return sum(lst)
 
 
-res, mem_diff, time_diff = min_value(list(range(1000000)))
-print(f'выполнение заняло {mem_diff} MiB и {time_diff} секунд')
+fact_sum(5000)
 
 
-@decor
-def min_value_two(lst):
-    min_v = lst[0]
-    for i in lst:
-        if i < min_v:
-            min_v = i
-            yield min_v
+@memory_profiler.profile
+def fact_sum_2(val):
+    lst = (math.factorial(i) for i in range(1, val))
+    return sum(lst)
 
 
-res2, mem_diff2, time_diff2 = min_value(list(range(1000000)))
-print(f'выполнение заняло {mem_diff2} MiB и {time_diff2} секунд')
+fact_sum_2(5000)
 
 '''
 Вывод:
-- вторая реализация функции методом "ленивых вычичслений" с помощью генератора
-расходует меньше память. 
-- нет большой  разницы во времени выполнения ( 0.12789899999999998 & 0.1408686 секунд)
+- Во втором примере выполнения функции мы испольовали кортеж, вместо списка, 
+- Вторая реализация функции "fact_sum_2" расходует меньше память ~ два раза. 
 '''

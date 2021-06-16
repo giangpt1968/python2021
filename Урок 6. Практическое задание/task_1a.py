@@ -22,6 +22,7 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 
+
 import memory_profiler
 from timeit import default_timer
 
@@ -36,36 +37,35 @@ def decor(func):
         time_diff = default_timer() - start_time
         return res, mem_diff, time_diff
     return wrapper
+@decor
+def splitter(string):
+    splitter_list = []
+    for i in range(len(string)):
+        for j in range(i + 1, len(string) + 1):
+            if string[i:j] != string:
+                splitter_list.append(hash(string[i:j]))
+    return set(splitter_list)
+
+
+res3, mem_diff3, time_diff3 = splitter('fasl;dfkjasdoij;oierjf;oijf;asdfjqwrqeoqawepokpokpolka;ldfkasdlkf')
+print(f'выполнение заняло {mem_diff3} MiB и {time_diff3} секунд')
 
 
 @decor
-def min_value(lst):
-    min_v = lst[0]
-    for i in lst:
-        if i < min_v:
-            min_v = i
-    return min_v
+def splitter_two(string):
+    splitter_list = []
+    for i in range(len(string)):
+        for j in range(i + 1, len(string) + 1):
+            if string[i:j] != string:
+                splitter_list.append(hash(string[i:j]))
+                yield set(splitter_list)
 
 
-res, mem_diff, time_diff = min_value(list(range(1000000)))
-print(f'выполнение заняло {mem_diff} MiB и {time_diff} секунд')
-
-
-@decor
-def min_value_two(lst):
-    min_v = lst[0]
-    for i in lst:
-        if i < min_v:
-            min_v = i
-            yield min_v
-
-
-res2, mem_diff2, time_diff2 = min_value(list(range(1000000)))
-print(f'выполнение заняло {mem_diff2} MiB и {time_diff2} секунд')
+res4, mem_diff4, time_diff4 = splitter('fasl;dfkjasdoij;oierjf;oijf;asdfjqwrqeoqawepokpokpolka;ldfkasdlkf')
+print(f'выполнение заняло {mem_diff4} MiB и {time_diff4} секунд')
 
 '''
 Вывод:
-- вторая реализация функции методом "ленивых вычичслений" с помощью генератора
-расходует меньше память. 
-- нет большой  разницы во времени выполнения ( 0.12789899999999998 & 0.1408686 секунд)
+- вторая реализация функции "splitter_two" расходует меньше память. 
+- нет разницы во времени выполнения ( 0.11051 & 0.11028 секунд)
 '''
